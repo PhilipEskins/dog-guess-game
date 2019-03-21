@@ -1,13 +1,11 @@
 export class Dogbreed {
-  // pickbreed() {
-  //   const breeds = ["boxer", "vizsla", "papillon", "dachshund", "chow", "beagle"];
-  //   const randNum = Math.floor(Math.random() * 6);
-  //   const doggie = breeds[randNum];
-  //
-  //   return doggie;
-  // }
+  constructor(score) {
+    this.score = score;
+  }
+
   getDogInput(dogGuess, dogBreed) {
     if (dogGuess === dogBreed){
+      this.score++;
       return true;
     } else {
       return false;

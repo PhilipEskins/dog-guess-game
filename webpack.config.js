@@ -20,7 +20,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'webpack-template-v5',
       template: './src/index.html',
-      inject: false
+      inject: true
     }),
     new CleanWebpackPlugin(['dist'])
   ],

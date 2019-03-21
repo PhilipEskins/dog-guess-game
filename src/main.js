@@ -5,13 +5,14 @@ import './sass/styles.scss';
 import { Dogbreed } from './logic.js';
 
 $(document).ready(function() {
-  const newGame = new Dogbreed;
+  const newGame = new Dogbreed(0);
   let dropDownArr = [];
   let dogName = startGame();
   makeDropDown();
   $("#tryAgain").hide();
 
   function makeDropDown() {
+    console.log("4makeDropDown")
     let promise =  newGame.getDogList();
     promise.then(function(response) {
       let body = JSON.parse(response);
@@ -28,6 +29,9 @@ $(document).ready(function() {
           // $("#dogDrop").html(`<option value="${element}">${element}</option>`);
         }
       });
+      dropDownArr.forEach(function(element) {
+        $("#dogDrop").append(`<option value="${element}">${element}</option>`);
+      });
     }, function(error) {
       $('.showErrors').text(`There was an error processing your request: ${error.message}`);
     });
@@ -35,11 +39,7 @@ $(document).ready(function() {
 
   function startGame() {
     let promise =  newGame.getDogPic();
-
     promise.then(function(response) {
-      dropDownArr.forEach(function(element) {
-        $("#dogDrop").append(`<option value="${element}">${element}</option>`);
-      });
       let body = JSON.parse(response);
       $("#picture").html(`<img src=${body.message}>`);
       let url = body.message;
@@ -51,7 +51,10 @@ $(document).ready(function() {
     }, function(error) {
       $('.showErrors').text(`There was an error processing your request: ${error.message}`);
     });
+    $("#score").text(`Your current score is ${newGame.score}`);
   }
+
+
 
   $("form#dogForm").submit(function(event) {
     event.preventDefault();
