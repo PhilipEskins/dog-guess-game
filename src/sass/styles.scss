@@ -11,6 +11,11 @@ h1{
   text-align: center;
 }
 
+.title, #result {
+  background-color: tan;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .theGoods {
 display: flex;
 flex-direction: column;
@@ -18,7 +23,6 @@ justify-content: center;
 text-align: center;
 
  .submit-button{
-
    padding-top: 25px;
  }
 }
@@ -26,6 +30,7 @@ text-align: center;
 #picture {
   height: 50vh;
   width: 80vw;
+  max-width: 1200px;
   img {
     height: 100%;
     width: 100%;
