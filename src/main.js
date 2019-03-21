@@ -7,32 +7,45 @@ import { Dogbreed } from './logic.js';
 $(document).ready(function() {
   const newGame = new Dogbreed;
   let dogName = startGame();
+  $("#tryAgain").hide();
 
   function startGame() {
-    let dogName = newGame.pickbreed();
-    let promise =  newGame.getDogPic(dogName);
+    // let begin = newGame.pickbreed();
+    let promise =  newGame.getDogPic();
     promise.then(function(response) {
       let body = JSON.parse(response);
       $("#picture").html(`<img src=${body.message}>`);
+      let url = body.message;
+      let broken = url.split('/');
+      let dogTest = broken[4];
+      console.log(dogTest);
+      let noHyphen = dogTest.replace("-", " ");
+      return dogName = noHyphen;
     }, function(error) {
       $('.showErrors').text(`There was an error processing your request: ${error.message}`);
     });
-    return dogName;
+    // return dogName;
   }
 
   $("form#dogForm").submit(function(event) {
+    console.log(dogName);
     event.preventDefault();
     const dogInput = $("#dogGuess").val();
     const dogCompare = newGame.getDogInput(dogInput.toLowerCase(), dogName)
     if (dogCompare === true) {
+      $("#result").show();
       $("#result").text("You guessed correctly!");
+      $("#tryAgain").show();
     } else {
       const correctCount= newGame.getLetter (dogInput.toLowerCase(), dogName)
-      $("#result").text("You guessed incorrectly! you have " + correctCount + "letter correct");
+      $("#result").show();
+      $("#result").text("You guessed incorrectly! you have " + correctCount + " letter correct");
+      $("#tryAgain").show();
     }
   });
   $("#tryAgain").click(function(event) {
+    $("#result").hide();
+    $("#tryAgain").hide();
     dogName = startGame();
-    console.log(dogName);
   })
 });

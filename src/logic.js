@@ -1,11 +1,11 @@
 export class Dogbreed {
-  pickbreed() {
-    const breeds = ["boxer", "vizsla", "papillon", "dachshund", "chow", "beagle"];
-    const randNum = Math.floor(Math.random() * 6);
-    const doggie = breeds[randNum];
-
-    return doggie;
-  }
+  // pickbreed() {
+  //   const breeds = ["boxer", "vizsla", "papillon", "dachshund", "chow", "beagle"];
+  //   const randNum = Math.floor(Math.random() * 6);
+  //   const doggie = breeds[randNum];
+  //
+  //   return doggie;
+  // }
   getDogInput(dogGuess, dogBreed) {
     if (dogGuess === dogBreed){
       return true;
@@ -24,10 +24,10 @@ export class Dogbreed {
       }
     return counter;
   }
-  getDogPic(dogName) {
+  getDogPic() {
     return new Promise(function(resolve, reject) {
     let request = new XMLHttpRequest();
-    let url = `https://dog.ceo/api/breed/${dogName}/images/random`;
+    let url = `https://dog.ceo/api/breeds/image/random`;
     request.onload = function() {
       if (this.status === 200) {
         resolve(request.response);
